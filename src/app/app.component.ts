@@ -1,8 +1,7 @@
 import { Component,ViewChild,ElementRef, OnInit} from '@angular/core';
 import { ApiService } from './api.service';
 import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
-import { Observable, forkJoin, interval, of } from "rxjs";
-import * as _ from 'lodash';
+
 import {
   trigger,
   state,
@@ -12,9 +11,6 @@ import {
   // ...
 } from "@angular/animations";
 import { ElementFinder } from 'protractor';
-declare var Plotly:any;
-
-
 
 @Component({
   selector: 'app-root',
@@ -39,7 +35,7 @@ declare var Plotly:any;
 export class AppComponent {
 
   dataform:FormGroup;
-  @ViewChild('chart',{static:false}) el: ElementRef;
+  
   title = 'crud';
   movies=[{title:'hate story'}];
   num=[1,2,3,4];
@@ -141,10 +137,7 @@ export class AppComponent {
       data=>{
         //this.movies.push(data);
         console.log(data);
-        this.pltx=data[0].x.split(',');
-        this.plty=data[0].y.split(',');
-        console.log(this.pltx,this.plty);
-        this.basicChart(this.pltx,this.plty);
+        
       },
       error=>{
         console.log(error);
@@ -154,27 +147,7 @@ export class AppComponent {
   showcompo(){
     this.showcompo_var=true;
   }
-  basicChart(xa:string[],ya:string[]){
-    const element=this.el.nativeElement
-    //console.log(xa,ya);
-    var xlst:number[]=new Array();
-    var ylst:number[]=new Array();
-    //xlst.push(5);
-    console.log(xa.length);
-    for (let i = 0; i < xa.length; i++) {
-      xlst.push(parseInt(xa[i],10));
-      ylst.push(parseInt(ya[i],10));
-    }
-    console.log(xlst,ylst);
-    const data=[{
-      x:xlst,
-      y:ylst
-    }]
-    const style={
-      margin:{ t:0}
-    }
-  Plotly.plot(element,data,style)
-  }
+  
 
   Imagedata = [
     "https://picsum.photos/id/402/2500/1667",
