@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from django.http import HttpResponse
 import sys
 from subprocess import run,PIPE
+from ..PyExternalScript import func33
 
 class MovieViewSet(viewsets.ModelViewSet):
     """
@@ -29,6 +30,7 @@ class outputplotViewSet(viewsets.ModelViewSet):
 
 
 def func(request):
+    '''
     movies=Movie.objects.all()
     serializer=MovieSerializer(movies,many=True)
     #print(serializer.data)
@@ -40,13 +42,15 @@ def func(request):
                 lstid=lstid+" "+str(value)
             if key=="title":
                 lsttitle=lsttitle+" "+value
-    out=run([sys.executable,'C:\\Users\\Rakesh Tembe\\Desktop\\PyExternalScript.py',lstid],shell=False,stdout=PIPE)
+    out=run([sys.executable,'C:\\Users\\Rakesh Tembe\\Desktop\\PyExternalScript.py',lstid],shell=False,stdout=PIPE)'''
+    func33()
+    '''
     xa,ya=out.stdout.decode("utf-8").split(';')
     print(xa,ya)
     outputplot.objects.all().delete()
     outputplot.objects.update_or_create(outputplot_id=1,x=xa,y=ya)
     #plot1 = outputplot(outputplot_id=1, x=xa,y=ya)
-    #plot1.save()
+    #plot1.save()'''
     return HttpResponse()
 
     

@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class ApiService {
   baseurl="http://127.0.0.1:8000";
+  
   httpHeaders=new HttpHeaders({'Content-Type':'application/json'});
   constructor(private http: HttpClient) { }
 
@@ -33,5 +34,12 @@ export class ApiService {
   }
   showplot(): Observable<any>{
     return this.http.get(this.baseurl+'/outputplot/',{headers:this.httpHeaders});
+  }
+  getData():Observable<any>{
+    return this.http.get("https://angulardeploy-test.herokuapp.com/outputplot/",{headers:this.httpHeaders});
+  }
+  postData():Observable<any>{
+    const body={id:8,x:"say"};
+    return this.http.post("https://angulardeploy-test.herokuapp.com/outputplot/",body,{headers:this.httpHeaders});
   }
 }
